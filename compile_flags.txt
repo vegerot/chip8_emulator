@@ -7,3 +7,4 @@
 -Wall
 -Wextra
 -pedantic
+-O3
