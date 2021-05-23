@@ -1,0 +1,9 @@
+-I./include
+-I/usr/local/opt/sdl2/include
+-L/usr/local/opt/sdl2/lib/
+-lSDL2main
+-lSDL2
+-g
+-Wall
+-Wextra
+-pedantic

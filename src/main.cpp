@@ -1,0 +1,54 @@
+#include "SDL2/SDL.h"
+#include <stdio.h>
+
+int main(int argc, char **argv) {
+  if (SDL_InitSubSystem(SDL_INIT_EVERYTHING) != 0) { // Initialize SDL2
+    SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
+    return 1;
+  }
+
+  // Create an application window with the following settings:
+  auto *window = SDL_CreateWindow("Chip8 Window", SDL_WINDOWPOS_UNDEFINED,
+                                  SDL_WINDOWPOS_UNDEFINED, 64 * 16, 32 * 16,
+                                  SDL_WINDOW_SHOWN);
+
+  // Check that the window was successfully created
+  if (window == NULL) {
+    printf("Could not create window: %s\n", SDL_GetError());
+    return 1;
+  }
+
+  SDL_Renderer *renderer =
+      SDL_CreateRenderer(window, -1, SDL_RENDERER_TARGETTEXTURE);
+
+  if (renderer == NULL) {
+    printf("Could not create render context: %s\n", SDL_GetError());
+    return 1;
+  }
+
+  while (1) {
+    SDL_Event event;
+    while (SDL_PollEvent(&event)) {
+      if (event.type == SDL_QUIT) {
+        goto out;
+      }
+    }
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+    SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+    SDL_Rect rc;
+    SDL_Rect *r = &rc;
+    r->x = 0;
+    r->y = 0;
+    (*r).w = 40;
+    r->h = 40;
+    SDL_RenderFillRect(renderer, r);
+    SDL_RenderPresent(renderer);
+  }
+
+  printf("Hello world!\n");
+out:
+  SDL_DestroyWindow(window);
+  SDL_QuitSubSystem(SDL_INIT_EVERYTHING);
+  return 0;
+}
