@@ -1,4 +1,5 @@
 #include "SDL2/SDL.h"
+#include "chip8.hpp"
 #include <stdio.h>
 
 int main(int argc, char **argv) {
@@ -8,9 +9,10 @@ int main(int argc, char **argv) {
   }
 
   // Create an application window with the following settings:
-  auto *window = SDL_CreateWindow("Chip8 Window", SDL_WINDOWPOS_UNDEFINED,
-                                  SDL_WINDOWPOS_UNDEFINED, 64 * 16, 32 * 16,
-                                  SDL_WINDOW_SHOWN);
+  auto *window = SDL_CreateWindow(
+      config::title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+      config::width * config::window_scale,
+      config::height * config::window_scale, SDL_WINDOW_SHOWN);
 
   // Check that the window was successfully created
   if (window == NULL) {

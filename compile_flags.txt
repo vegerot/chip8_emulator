@@ -8,3 +8,4 @@
 -Wextra
 -pedantic
 -O3
+-std=c++2a
