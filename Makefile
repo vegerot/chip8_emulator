@@ -3,11 +3,19 @@ INCLUDES= -I./include -I/usr/local/opt/sdl2/include
 LIBS= -L/usr/local/opt/sdl2/lib/ -lSDL2main -lSDL2
 
 BIN= /usr/local/opt/sdl2/bin
-CXXFLAGS= -O3 -std=c++2a
+CXXFLAGS= -std=c++2a
 FLAGS= -g -Wall -Wextra -pedantic
-all:
-	#cc ${INCLUDES} ${LIBS} ${FLAGS} ./src/main.c -o ./bin/main
-	c++ ${INCLUDES} ${LIBS} ${FLAGS} ${CXXFLAGS} ./src/main.cpp -o ./bin/main
+
+OBJECTS=./build/chip8memory.o
+all: ${OBJECTS}
+	c++ ${INCLUDES} ${LIBS} ${FLAGS} ${CXXFLAGS} ${OBJECTS} ./src/main.cpp -o ./bin/main
+
+./build/chip8memory.o:src/chip8memory.cpp
+	c++ ${INCLUDES} ${FLAGS} ${CXXFLAGS} ./src/chip8memory.cpp -c -o ./build/chip8memory.o
+
+clean:
+	rm -rfv build/*
+
 compile_flags:
 	rm compile_flags.txt
 	touch compile_flags.txt
