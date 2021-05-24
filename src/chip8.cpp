@@ -23,4 +23,6 @@ void chip8_init(struct chip8 *chip8) {
   memset(chip8, (int)NULL, sizeof(struct chip8));
   memcpy(&chip8->memory.memory, chip8_default_character_set,
          sizeof(chip8_default_character_set));
+  memset(chip8->screen.pixels, (int)NULL,
+         sizeof(((struct chip8 *)0)->screen.pixels));
 }

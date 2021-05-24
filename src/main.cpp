@@ -1,6 +1,7 @@
 #include "SDL2/SDL.h"
 #include "chip8.hpp"
 #include "chip8keyboard.hpp"
+#include "chip8screen.hpp"
 #include <stdio.h>
 
 const char keyboard_map[config::total_keys] = {
@@ -33,10 +34,34 @@ static int handleEvent(chip8 *chip8, SDL_Event *event) {
   return 0;
 }
 
+static void renderFrame(SDL_Renderer *renderer, chip8 *chip8) {
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+  SDL_RenderClear(renderer);
+  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+
+  for (int x = 0; x < config::width; ++x) {
+    for (int y = 0; y < config::height; ++y) {
+      bool isSet = chip8_screen_is_set(&chip8->screen, x, y);
+      // printf("isSet: %i %i %i\n", x, y, isSet);
+      if (isSet) {
+        SDL_Rect r;
+        r.x = x * config::window_scale;
+        r.y = y * config::window_scale;
+        (r).w = config::window_scale;
+        r.h = config::window_scale;
+        SDL_RenderFillRect(renderer, &r);
+      }
+    }
+  }
+  SDL_RenderPresent(renderer);
+}
+
 int main(void) {
 
   struct chip8 chip8;
   chip8_init(&chip8);
+
+  chip8_screen_set(&chip8.screen, 10, 1);
 
   if (SDL_InitSubSystem(SDL_INIT_EVERYTHING) != 0) { // Initialize SDL2
     SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
@@ -63,27 +88,18 @@ int main(void) {
     return 1;
   }
 
-  while (1) {
+  for (;;) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
       if (handleEvent(&chip8, &event) == -1)
         goto out;
     }
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-    SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
-    SDL_Rect rc;
-    SDL_Rect *r = &rc;
-    r->x = 0;
-    r->y = 0;
-    (*r).w = 40;
-    r->h = 40;
-    SDL_RenderFillRect(renderer, r);
-    SDL_RenderPresent(renderer);
+    renderFrame(renderer, &chip8);
   }
 
   printf("Hello world!\n");
 out:
+  printf("exiting\n");
   SDL_DestroyWindow(window);
   SDL_QuitSubSystem(SDL_INIT_EVERYTHING);
   return 0;

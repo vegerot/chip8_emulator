@@ -4,6 +4,7 @@
 #include "chip8keyboard.hpp"
 #include "chip8memory.hpp"
 #include "chip8registers.hpp"
+#include "chip8screen.hpp"
 #include "chip8stack.hpp"
 #include "config.hpp"
 // everything goes here.  Memory, registers, pixels, etc.
@@ -12,6 +13,7 @@ struct chip8 {
   struct chip8_stack stack;
   struct chip8_registers registers;
   struct chip8_keyboard keyboard;
+  struct chip8_screen screen;
 };
 
 void chip8_init(struct chip8 *chip8);
