@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include <_types/_uint16_t.h>
+#include <cstdint>
 namespace config {
 constexpr char const *title = "Chip8 Window";
 constexpr int memory_size = 0x1000;

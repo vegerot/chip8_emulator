@@ -2,3 +2,8 @@
 .DS_Store
 bin/main
 build/*.o
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+*.a
+Makefile

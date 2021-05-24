@@ -2,8 +2,7 @@
 #define CHIP8REGISTERS_H
 
 #include "config.hpp"
-#include <_types/_uint16_t.h>
-#include <_types/_uint8_t.h>
+#include <cstdint>
 struct chip8_registers {
   uint8_t V[config::gp_register_count];
 

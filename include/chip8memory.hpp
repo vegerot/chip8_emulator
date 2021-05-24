@@ -2,8 +2,7 @@
 #define CHIP8MEMORY_H
 
 #include "config.hpp"
-#include <_types/_uint16_t.h>
-#include <_types/_uint8_t.h>
+#include <cstdint>
 #include <stddef.h>
 struct chip8_memory {
   uint16_t memory[config::memory_size];

@@ -1,4 +1,4 @@
-#include "SDL2/SDL.h"
+#include "SDL.h"
 #include "chip8.hpp"
 #include "chip8keyboard.hpp"
 #include "chip8screen.hpp"

@@ -1,7 +1,7 @@
 #ifndef CHIP8STACK_H
 #define CHIP8STACK_H
 #include "config.hpp"
-#include <_types/_uint16_t.h>
+#include <cstdint>
 
 struct chip8;
 struct chip8_stack {
