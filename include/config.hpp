@@ -10,6 +10,7 @@ constexpr auto window_scale = 0x10;
 
 constexpr int gp_register_count = 0x10;
 constexpr int stack_depth = 0x10;
+constexpr int total_keys = 0x10;
 } // namespace config
 
 #endif

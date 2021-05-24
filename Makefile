@@ -6,7 +6,7 @@ BIN= /usr/local/opt/sdl2/bin
 CXXFLAGS= -std=c++2a
 FLAGS= -g -Wall -Wextra -pedantic
 
-OBJECTS= ./build/chip8memory.o ./build/chip8stack.o
+OBJECTS= ./build/chip8memory.o ./build/chip8stack.o ./build/chip8keyboard.o
 all: ${OBJECTS}
 	c++ ${INCLUDES} ${LIBS} ${FLAGS} ${CXXFLAGS} ${OBJECTS} ./src/main.cpp -o ./bin/main
 
@@ -14,6 +14,8 @@ all: ${OBJECTS}
 	c++ ${INCLUDES} ${FLAGS} ${CXXFLAGS} ./src/chip8memory.cpp -c -o ./build/chip8memory.o
 ./build/chip8stack.o:src/chip8stack.cpp
 	c++ ${INCLUDES} ${FLAGS} ${CXXFLAGS} ./src/chip8stack.cpp -c -o ./build/chip8stack.o
+./build/chip8keyboard.o:src/chip8keyboard.cpp
+	c++ ${INCLUDES} ${FLAGS} ${CXXFLAGS} ./src/chip8keyboard.cpp -c -o ./build/chip8keyboard.o
 
 clean:
 	rm -rfv build/*
