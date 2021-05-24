@@ -36,20 +36,7 @@ static int handleEvent(chip8 *chip8, SDL_Event *event) {
 int main(void) {
 
   struct chip8 chip8;
-
-  chip8_keyboard_down(&chip8.keyboard, 0x0f);
-  chip8_keyboard_up(&chip8.keyboard, 0x0f);
-  printf("%i\n", chip8_keyboard_is_down(&chip8.keyboard, 0x0f));
-
-  chip8.registers.sp = 0;
-
-  chip8_stack_push(&chip8, 0xff);
-  chip8_stack_push(&chip8, 0xaa);
-
-  printf("0x%x\n", chip8_stack_pop(&chip8));
-  printf("0x%x\n", chip8_stack_pop(&chip8));
-  printf("0x%x\n", chip8_stack_pop(&chip8));
-  // printf("0x%x\n", chip8_stack_pop(&chip8));
+  chip8_init(&chip8);
 
   if (SDL_InitSubSystem(SDL_INIT_EVERYTHING) != 0) { // Initialize SDL2
     SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
