@@ -5,8 +5,15 @@
 int main(void) {
 
   struct chip8 chip8;
-  chip8_memory_set(&chip8.memory, 0x500, 'D');
-  SDL_Log("%c\n", chip8_memory_get(&chip8.memory, 0x500));
+  chip8.registers.sp = 0;
+
+  chip8_stack_push(&chip8, 0xff);
+  chip8_stack_push(&chip8, 0xaa);
+
+  printf("0x%x\n", chip8_stack_pop(&chip8));
+  printf("0x%x\n", chip8_stack_pop(&chip8));
+  printf("0x%x\n", chip8_stack_pop(&chip8));
+  printf("0x%x\n", chip8_stack_pop(&chip8));
 
   if (SDL_InitSubSystem(SDL_INIT_EVERYTHING) != 0) { // Initialize SDL2
     SDL_Log("Unable to initialize SDL: %s", SDL_GetError());

@@ -1,4 +1,4 @@
 *.dSYM
 .DS_Store
 bin/main
-build/chip8memory.o
+build/*.o

@@ -2,16 +2,18 @@
 #define CHIP8REGISTERS_H
 
 #include "config.hpp"
+#include <_types/_uint16_t.h>
+#include <_types/_uint8_t.h>
 struct chip8_registers {
-  unsigned char V[config::gp_register_count];
+  uint8_t V[config::gp_register_count];
 
-  unsigned short I;
+  uint16_t I;
 
-  unsigned char delay_timer;
-  unsigned char sound_timer;
+  uint8_t delay_timer;
+  uint8_t sound_timer;
 
-  unsigned short pc;
-  unsigned char sp;
+  uint16_t pc;
+  uint8_t sp;
 };
 
 #endif
