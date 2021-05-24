@@ -7,6 +7,7 @@ int main(void) {
   struct chip8 chip8;
   chip8_memory_set(&chip8.memory, 0x500, 'D');
   SDL_Log("%c\n", chip8_memory_get(&chip8.memory, 0x500));
+
   if (SDL_InitSubSystem(SDL_INIT_EVERYTHING) != 0) { // Initialize SDL2
     SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
     return 1;
