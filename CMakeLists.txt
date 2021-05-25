@@ -23,7 +23,7 @@ target_include_directories(Chip8 PUBLIC "./include")
 include(FetchContent)
 FetchContent_Declare(
   googletest
-  URL https://github.com/google/googletest/archive/refs/tags/release-1.10.0.zip
+  URL https://github.com/google/googletest/archive/a3460d1aeeaa43fdf137a6adefef10ba0b59fe4b.zip
   )
 FetchContent_MakeAvailable(googletest)
 
