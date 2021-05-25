@@ -1,5 +1,5 @@
 #include "SDL.h"
-#include "chip8.cpp"
+#include "chip8.hpp"
 #include <stdio.h>
 
 const char keyboard_map[config::total_keys] = {

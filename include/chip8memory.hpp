@@ -9,6 +9,6 @@ struct chip8_memory {
 };
 
 uint8_t chip8_memory_get(struct chip8_memory *memory, size_t index);
-void chip8_memory_set(struct chip8_memory *memory, size_t index, uint8_t val);
+int chip8_memory_set(struct chip8_memory *memory, size_t index, uint8_t val);
 
 #endif
