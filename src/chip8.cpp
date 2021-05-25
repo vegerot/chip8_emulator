@@ -1,4 +1,8 @@
 #include "chip8.hpp"
+#include "chip8keyboard.cpp"
+#include "chip8memory.cpp"
+#include "chip8screen.cpp"
+#include "chip8stack.cpp"
 #include <memory.h>
 
 const uint8_t chip8_default_character_set[] = {
