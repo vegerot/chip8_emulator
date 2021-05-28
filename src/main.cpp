@@ -108,6 +108,11 @@ int main(void) {
       --chip8.registers.DT;
       printf("delay!!!\n");
     }
+
+    if (chip8.registers.ST > 0) {
+      // Beep(8000, config::frame_rate);
+      --chip8.registers.ST;
+    }
   }
 
 out:

@@ -27,6 +27,8 @@ const uint8_t chip8_default_character_set[] = {
 void chip8_init(struct chip8 *chip8) {
   memset(chip8, (int)NULL, sizeof(struct chip8));
   chip8->registers.sp = 0;
+  chip8->registers.DT = 0;
+  chip8->registers.ST = 0;
   memset(&chip8->stack.stack, (int)NULL,
          sizeof(((struct chip8 *)0)->stack.stack));
   memcpy(&chip8->memory.memory, chip8_default_character_set,
