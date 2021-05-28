@@ -8,8 +8,8 @@ struct chip8_registers {
 
   uint16_t I;
 
-  uint8_t delay_timer;
-  uint8_t sound_timer;
+  uint8_t DT;
+  uint8_t ST;
 
   uint16_t pc;
   uint8_t sp;

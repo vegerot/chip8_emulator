@@ -1,6 +1,7 @@
 #include "SDL.h"
 #include "chip8.hpp"
 #include <stdio.h>
+#include <unistd.h>
 
 const char keyboard_map[config::total_keys] = {
     SDLK_0, SDLK_1, SDLK_2, SDLK_3, SDLK_4, SDLK_5, SDLK_6, SDLK_7,
@@ -55,6 +56,7 @@ static void renderFrame(SDL_Renderer *renderer, chip8 *chip8) {
 }
 
 int main(void) {
+  printf("Hello world!\n");
 
   struct chip8 chip8;
   chip8_init(&chip8);
@@ -100,9 +102,14 @@ int main(void) {
         goto out;
     }
     renderFrame(renderer, &chip8);
+
+    if (chip8.registers.DT > 0) {
+      sleep(config::frame_rate);
+      --chip8.registers.DT;
+      printf("delay!!!\n");
+    }
   }
 
-  printf("Hello world!\n");
 out:
   printf("exiting\n");
   SDL_DestroyWindow(window);

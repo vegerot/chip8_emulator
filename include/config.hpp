@@ -14,6 +14,9 @@ constexpr int stack_depth = 0x10;
 constexpr int total_keys = 0x10;
 
 constexpr uint16_t character_set_load_address = 0x00;
+
+/** in ms*/
+constexpr unsigned int frame_rate = 60;
 } // namespace config
 
 #endif
