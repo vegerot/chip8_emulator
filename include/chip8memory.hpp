@@ -5,7 +5,7 @@
 #include <cstdint>
 #include <stddef.h>
 struct chip8_memory {
-  uint16_t memory[config::memory_size];
+  uint8_t memory[config::memory_size];
 };
 
 uint8_t chip8_memory_get(struct chip8_memory *memory, size_t index);
