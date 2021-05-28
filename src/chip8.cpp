@@ -23,6 +23,7 @@ const uint8_t chip8_default_character_set[] = {
     0xF0, 0x80, 0xF0, 0x80, 0xF0, // 'E'
     0xF0, 0x80, 0xF0, 0x80, 0x80  // 'F'
 };
+
 void chip8_init(struct chip8 *chip8) {
   memset(chip8, (int)NULL, sizeof(struct chip8));
   chip8->registers.sp = 0;

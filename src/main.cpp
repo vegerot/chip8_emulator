@@ -59,7 +59,14 @@ int main(void) {
   struct chip8 chip8;
   chip8_init(&chip8);
 
-  chip8_screen_set(&chip8.screen, 10, 1);
+  /*
+  chip8_screen_draw_sprite(&chip8.screen, config::width - 2, config::height - 2,
+                           &chip8.memory.memory[0x00], 5);
+                           */
+  for (int num = 0; num <= 0xF; ++num) {
+    chip8_screen_draw_sprite(&chip8.screen, num * 0x5, (num / 0xD) * 5,
+                             &chip8.memory.memory[0x00 + num * 5], 5);
+  }
 
   if (SDL_InitSubSystem(SDL_INIT_EVERYTHING) != 0) { // Initialize SDL2
     SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
