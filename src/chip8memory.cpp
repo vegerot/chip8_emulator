@@ -10,7 +10,7 @@ inline static bool chip8_memory_in_bounds(size_t index) {
 }
 uint8_t chip8_memory_get(struct chip8_memory *memory, size_t index) {
   if (!chip8_memory_in_bounds(index))
-    return -1;
+    assert(false);
   return memory->memory[index];
 }
 
@@ -20,4 +20,10 @@ int chip8_memory_set(struct chip8_memory *memory, size_t index, uint8_t val) {
     return -1;
   memory->memory[index] = val;
   return 0;
+}
+
+uint16_t chip8_memory_get_uint16(struct chip8_memory *memory, int index) {
+  auto byte1 = chip8_memory_get(memory, index);
+  auto byte2 = chip8_memory_get(memory, index + 1);
+  return byte1 << 8 | byte2;
 }

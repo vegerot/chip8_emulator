@@ -1,6 +1,7 @@
 #include "chip8screen.hpp"
 #include <assert.h>
 #include <cstdio>
+#include <memory.h>
 
 static void chip8_screen_check_bounds(int x, int y) {
   assert(x >= 0 && x < config::width && y >= 0 && y < config::height);
@@ -45,4 +46,8 @@ size_t get_wrapped_index(int offset, size_t size) {
 
     return (offset % (int)size + (int)size);
   }
+}
+
+void chip8_screen_clear(struct chip8_screen *screen) {
+  memset(screen->pixels, 0, sizeof(screen->pixels));
 }

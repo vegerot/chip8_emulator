@@ -1,5 +1,6 @@
 #include "SDL.h"
 #include "chip8.hpp"
+#include <cstdio>
 #include <stdio.h>
 #include <unistd.h>
 
@@ -55,16 +56,40 @@ static void renderFrame(SDL_Renderer *renderer, chip8 *chip8) {
   SDL_RenderPresent(renderer);
 }
 
-int main(void) {
-  printf("Hello world!\n");
+int main(int argc, const char *argv[]) {
+
+  if (argc < 2) {
+    printf("You must provide a file to load\n");
+    return -1;
+  }
+
+  const char *filename = argv[1];
+  printf("The filename to load is '%s'\n", filename);
+
+  FILE *file = fopen(filename, "r");
+  if (!file) {
+    printf("Failed to open the file\n");
+    return -1;
+  }
+
+  fseek(file, 0, SEEK_END);
+  auto file_size = ftell(file);
+  fseek(file, 0, SEEK_SET);
+
+  uint8_t buf[config::memory_size - config::program_load_address];
+  const int chunk_size = 1;
+  int objects_read = fread(buf, file_size, chunk_size, file);
+
+  if (objects_read != chunk_size) {
+    std::perror("Failed to read from file");
+    printf("%s\n", buf);
+    return -1;
+  }
 
   struct chip8 chip8;
   chip8_init(&chip8);
+  chip8_load(&chip8, buf, file_size);
 
-  /*
-  chip8_screen_draw_sprite(&chip8.screen, config::width - 2, config::height - 2,
-                           &chip8.memory.memory[0x00], 5);
-                           */
   for (int num = 0; num <= 0xF; ++num) {
     chip8_screen_draw_sprite(&chip8.screen, num * 0x5, (num / 0xD) * 5,
                              &chip8.memory.memory[0x00 + num * 5], 5);
@@ -113,10 +138,16 @@ int main(void) {
       // Beep(8000, config::frame_rate);
       --chip8.registers.ST;
     }
+
+    uint16_t opcode =
+        chip8_memory_get_uint16(&chip8.memory, chip8.registers.pc);
+    chip8_exec(&chip8, opcode);
+    chip8.registers.pc += 2;
   }
 
 out:
   printf("exiting\n");
+  fclose(file);
   SDL_DestroyWindow(window);
   SDL_QuitSubSystem(SDL_INIT_EVERYTHING);
   return 0;

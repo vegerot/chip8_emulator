@@ -36,3 +36,16 @@ void chip8_init(struct chip8 *chip8) {
   memset(chip8->screen.pixels, (int)NULL,
          sizeof(((struct chip8 *)0)->screen.pixels));
 }
+
+void chip8_load(struct chip8 *chip8, const uint8_t *buf, size_t size) {
+  assert(size + config::program_load_address < config::memory_size);
+  memcpy(&chip8->memory.memory[config::program_load_address], buf, size);
+  chip8->registers.pc = config::program_load_address;
+}
+void chip8_exec(struct chip8 *chip8, uint16_t opcode) {
+  switch (opcode) {
+  case 0x00E0:
+    chip8_screen_clear(&chip8->screen);
+    break;
+  }
+}
