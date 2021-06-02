@@ -8,6 +8,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CHIP8_CXX_COMPILE_FLAGS "-g -Wall -Wextra -pedantic -Wimplicit-fallthrough")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CHIP8_CXX_COMPILE_FLAGS}")
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_BUILD_TYPE Debug)
 
 find_package(SDL2 REQUIRED)
@@ -21,6 +22,7 @@ target_link_libraries(Chip8 ${SDL2_LIBRARIES} chip8Base)
 target_include_directories(Chip8 PUBLIC "${PROJECT_BINARY_DIR}")
 target_include_directories(Chip8 PUBLIC "./include")
 
+enable_testing()
 include(FetchContent)
 FetchContent_Declare(
   googletest
@@ -28,10 +30,10 @@ FetchContent_Declare(
   )
 FetchContent_MakeAvailable(googletest)
 
-enable_testing()
 
 add_executable(
   chip8_test
+  EXCLUDE_FROM_ALL
   test/chip8_test.cc
   )
 target_link_libraries(
