@@ -9,4 +9,6 @@ cmake_install.cmake
 Makefile
 .cache
 Testing/
-build/
+build/*
+bin/*
+compile_commands.json

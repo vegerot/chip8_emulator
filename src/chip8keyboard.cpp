@@ -1,12 +1,15 @@
 #include "chip8keyboard.hpp"
 #include <assert.h>
-char chip8_keyboard_map(const char *map, char key) {
+void chip8_keyboard_set_map(struct chip8_keyboard *keyboard, const char *map) {
+  keyboard->keyboard_map = map;
+}
+char chip8_keyboard_map(struct chip8_keyboard *keyboard, char key) {
   // TODO implement a constant-time solution
   // ideas:
   //  hashmap
   //  compile-time thing
   for (int i = 0; i < config::total_keys; ++i) {
-    if (map[i] == key)
+    if (keyboard->keyboard_map[i] == key)
       return i;
   }
   return -1;

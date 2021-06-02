@@ -2,12 +2,13 @@ cmake_minimum_required(VERSION 3.20)
 
 project(Chip8 VERSION 0.1)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-set(CHIP8_CXX_COMPILE_FLAGS "-g -Wall -Wextra -pedantic")
+set(CHIP8_CXX_COMPILE_FLAGS "-g -Wall -Wextra -pedantic -Wimplicit-fallthrough")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CHIP8_CXX_COMPILE_FLAGS}")
+set(CMAKE_BUILD_TYPE Debug)
 
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
